@@ -1,17 +1,36 @@
 package gui;
 
+import com.toedter.calendar.JDateChooser;
+import controlador.Controlador;
+import modelo.Socio;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
  * Created by ratadp on 22/05/14.
  */
 public class Principal extends Estilo {
     private JFrame frame;
+    private Controlador con;
+    private JTextField tNom,tApellido,tDni;
+    private JCheckBox bMenor;
+    private JDateChooser tAlta;
+    private List<Socio> listaSocio;
+    private Socio socio;
+    private JList<String> jList;
+    private String[] data;
+    private int indice;
 
     public Principal(){
         super();
         frame = new JFrame("App de la Peña El Masclet");
+        this.con = new Controlador();
         ejecutar();
     }
 
@@ -24,13 +43,14 @@ public class Principal extends Estilo {
         JPanel der = new JPanel();
         der.setBackground(getColorFondo());
         der.setBorder(BorderFactory.createTitledBorder("Lista de socios"));
-//        JList<String> listaNombre = new JList<String>(controlador.getListaNombre());
-        String[] data = cogerNombres();
-        JList<String> listaNombre = new JList<String>(data);
-        listaNombre.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listaNombre.setLayoutOrientation(JList.VERTICAL);
-        JScrollPane scroll = new JScrollPane(listaNombre);
-        scroll.setPreferredSize(new Dimension(200, 330));
+        listaSocio = con.getListSocios();
+        data = con.getVectorNombres(listaSocio);
+        jList = new JList<String>(data);
+
+        jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jList.setLayoutOrientation(JList.VERTICAL);
+        JScrollPane scroll = new JScrollPane(jList);
+        scroll.setPreferredSize(new Dimension(230, 330));
         der.add(scroll);
         trabajo.add(der);
 
@@ -46,7 +66,7 @@ public class Principal extends Estilo {
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         centro.add(lNom,constraints);
-        JTextField tNom = new JTextField(15);
+        tNom = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
@@ -59,7 +79,7 @@ public class Principal extends Estilo {
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         centro.add(lApellido,constraints);
-        JTextField tApellido = new JTextField(15);
+        tApellido = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
@@ -72,7 +92,7 @@ public class Principal extends Estilo {
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         centro.add(lDni,constraints);
-        JTextField tDni = new JTextField(15);
+        tDni = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 2;
         constraints.gridwidth = 1;
@@ -85,7 +105,7 @@ public class Principal extends Estilo {
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         centro.add(lMenor,constraints);
-        JCheckBox bMenor = new JCheckBox();
+        bMenor = new JCheckBox();
         constraints.gridx = 1;
         constraints.gridy = 3;
         constraints.gridwidth = 1;
@@ -98,12 +118,11 @@ public class Principal extends Estilo {
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         centro.add(lAlta,constraints);
-        JTextField tAlta = new JTextField(15);
+        tAlta = new JDateChooser("dd / MM / yy","## / ## / ##",'_');
         constraints.gridx = 1;
         constraints.gridy = 4;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
-        tAlta.setActionCommand("alta");
         centro.add(tAlta,constraints);
         izq.add(centro,BorderLayout.CENTER);
 
@@ -113,6 +132,17 @@ public class Principal extends Estilo {
 
         trabajo.add(izq);
 
+        //LISTENERS
+            // MOUSE LISTENER
+        ListenerRaton listenerRaton = new ListenerRaton();
+        jList.addMouseListener(listenerRaton);
+            // ACTION LISTENER
+        ListenerAccion listenerAccion = new ListenerAccion();
+        tNom.addActionListener(listenerAccion);
+        tApellido.addActionListener(listenerAccion);
+        tDni.addActionListener(listenerAccion);
+        bMenor.addActionListener(listenerAccion);
+
         frame.setContentPane(trabajo);
 //        frame.pack();
         frame.setSize(600, 400);
@@ -120,9 +150,51 @@ public class Principal extends Estilo {
         frame.setVisible(true);
     }
 
-    private String[] cogerNombres() {
-        String[] devolver = {"Pepito Grillo", "Abeja Maya", "Jack Sparrow", "NyssadiNim", "Teemo Hitler", "Lindo Gatito","Silvester Stalone","Piolin","Pato Lucas", "Palote Palote"};
-        return devolver;
+    private class ListenerRaton extends MouseAdapter{
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {
+            JList theList = (JList) mouseEvent.getSource();
+            if (mouseEvent.getClickCount() == 1) {
+                int index = theList.locationToIndex(mouseEvent.getPoint());
+                indice = index;
+                if (index >= 0) {
+                    socio = listaSocio.get(index);
+                    tNom.setText(socio.getNombre());
+                    tApellido.setText(socio.getApellido());
+                    tDni.setText(socio.getDni());
+                    tAlta.setCalendar(socio.getFechaIngreso());
+                    if (socio.isMayorEdad())
+                        bMenor.setSelected(true);
+                    else bMenor.setSelected(false);
+                }
+            }
+        }
+    }
+
+    private class ListenerAccion implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String s = e.getActionCommand();
+            String dni = socio.getDni();
+            if (s.equals("nombre")) {
+                System.out.println(e.getActionCommand());
+                if (!tNom.getText().equals(socio.getNombre())) {
+                    con.setNombre(dni, tNom.getText());
+                    data[indice] = tNom.getText() +" "+ tApellido.getText();
+                }
+                jList.repaint();
+            } else if (s.equals("apellido")) {
+                System.out.println(e.getActionCommand());
+                if (!tApellido.getText().equals(socio.getApellido())) {
+                    con.setApellido(dni, tApellido.getText());
+                    data[indice] = tNom.getText() +" "+ tApellido.getText();
+                }
+                jList.repaint();
+            } else if (s.equals("menor")) {
+                System.out.println(e.getActionCommand());
+                con.setMenor(dni,bMenor.isSelected());
+            }
+        }
     }
 
     public static void main(String[] args) {
