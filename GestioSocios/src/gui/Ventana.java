@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by ratadp on 22/05/14.
