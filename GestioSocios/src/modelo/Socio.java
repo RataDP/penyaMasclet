@@ -1,3 +1,5 @@
+package modelo;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -66,9 +68,9 @@ public class Socio {
         return dni;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
+//    public void setDni(String dni) {
+//        this.dni = dni;
+//    }
 
     public Calendar getFechaIngreso() {
         return fechaIngreso;
