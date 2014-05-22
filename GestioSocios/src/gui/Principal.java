@@ -46,9 +46,9 @@ public class Principal extends Estilo {
         listaSocio = con.getListSocios();
         data = con.getVectorNombres(listaSocio);
         jList = new JList<String>(data);
-
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jList.setLayoutOrientation(JList.VERTICAL);
+        jList.setFont(getMono());
         JScrollPane scroll = new JScrollPane(jList);
         scroll.setPreferredSize(new Dimension(230, 330));
         der.add(scroll);
