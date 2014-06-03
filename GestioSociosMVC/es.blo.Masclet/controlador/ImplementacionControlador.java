@@ -64,7 +64,6 @@ public class ImplementacionControlador implements Controlador {
     @Override
     public void borrarSocio() {
         String dni = vista.getDNIBorrar();
-        System.out.println(dni);
         modelo.removeSocio(dni);
     }
 

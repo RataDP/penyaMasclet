@@ -58,7 +58,6 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo {
 
     @Override
     public void removeSocio(String dni) {
-        System.out.println(dni);
         if (gS.removeSocio(dni))
             vista.socioBorrado();
         else
