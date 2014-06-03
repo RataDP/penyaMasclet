@@ -11,6 +11,8 @@ import java.util.Calendar;
 public interface ModificarModelo {
     public void addSocio(String dni, String nombre, String apellido, int anyo, Calendar ingreso);
 
+    public void actualizarSocio(String dni, String nombre, String apellido, int anyo, Calendar ingreso);
+
     public void removeSocio(String dni);
 
     public void addPago(String dni, Pago pago);

@@ -6,15 +6,15 @@ import java.util.Calendar;
  * Created by ratadp on 3/06/14.
  */
 public interface PreguntarVista {
-    public String getDNI();
+    public String getDNINuevo();
 
-    public String getNombre();
+    public String getNombreNuevo();
 
-    public String getApellido();
+    public String getApellidoNuevo();
 
-    public int getAnyo();
+    public int getAnyoNuevo();
 
-    public Calendar getIngreso();
+    public Calendar getIngresoNuevo();
 
     public String getDNIBorrar();
 
@@ -23,4 +23,14 @@ public interface PreguntarVista {
     public double getCantidadPago();
 
     public Calendar getFechaPago();
+
+    public String getDnI();
+
+    public String getNombre();
+
+    public String getApellido();
+
+    public int getAnyo();
+
+    public Calendar getIngreso();
 }

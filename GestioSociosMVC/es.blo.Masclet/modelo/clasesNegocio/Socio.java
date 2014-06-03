@@ -29,6 +29,22 @@ public class Socio implements Serializable {
         this.pagos = new TreeSet<>();
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setAnyoNacimiento(int anyoNacimiento) {
+        this.anyoNacimiento = anyoNacimiento;
+    }
+
+    public void setFechaIngreso(Calendar fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
     public String getNombre() {
         return nombre;
     }

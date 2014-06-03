@@ -24,8 +24,8 @@ public class GestorSocio implements Serializable {
     }
 
     public boolean addSocio(Socio socio) {
-        Socio comprueba = mapaSocios.put(socio.getDni(),socio);
-        if (comprueba.equals(socio))
+        mapaSocios.put(socio.getDni(),socio);
+        if (mapaSocios.containsKey(socio.getDni()))
             return true;
         return false;
     }

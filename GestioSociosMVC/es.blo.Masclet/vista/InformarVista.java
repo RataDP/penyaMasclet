@@ -17,4 +17,6 @@ public interface InformarVista {
     public void pagoAnyadido();
 
     public void bdVacia();
+
+    public void socioActualizado();
 }

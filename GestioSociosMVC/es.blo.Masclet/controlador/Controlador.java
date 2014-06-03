@@ -10,6 +10,8 @@ public interface Controlador {
 
     public void nuevoSocio();
 
+    public void actualizarSocio();
+
     public void borrarSocio();
 
     public void nuevoPago();

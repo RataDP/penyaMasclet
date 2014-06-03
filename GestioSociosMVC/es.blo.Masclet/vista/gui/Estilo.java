@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by ratadp on 3/06/14.
  */
-public abstract class Estilo {
+public class Estilo {
     private Color color;
     private Font sansS;
     private Font mono;

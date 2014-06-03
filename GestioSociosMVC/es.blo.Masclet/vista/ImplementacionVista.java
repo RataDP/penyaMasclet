@@ -3,6 +3,8 @@ package vista;
 import controlador.Controlador;
 import modelo.PreguntarModelo;
 import vista.gui.Bienvenida;
+import vista.gui.Estilo;
+import vista.gui.VentanaPrincipal;
 
 import javax.swing.*;
 import java.util.Calendar;
@@ -17,11 +19,14 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     private Controlador controlador;
     private JFrame frame;
     private Bienvenida welcome;
+    private Estilo estilo;
+    private VentanaPrincipal ventanaPrincipal;
 
     public ImplementacionVista() {
         super();
         this.frame = new JFrame("Mascletet");
         this.welcome = new Bienvenida();
+
     }
 
     public void setModelo(PreguntarModelo modelo) {
@@ -33,6 +38,12 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     }
 
     public void crearGUI() {
+        welcome.ejecutar();
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -42,14 +53,15 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     }
 
     private void gui() {
-        try {
-            welcome.ejecutar();
-            sleep(5000);
-            welcome.cerrarVentana();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        welcome.cerrarVentana();
+        frame = venPrincipal();
+        ventanaPrincipal.ejecutar();
 
+    }
+
+    private JFrame venPrincipal() {
+        ventanaPrincipal = new VentanaPrincipal(frame,modelo,controlador);
+        return ventanaPrincipal.getFrame();
     }
 
     @Override
@@ -89,33 +101,38 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     }
 
     @Override
-    public String getDNI() {
+    public void socioActualizado() {
+        JOptionPane.showMessageDialog(frame, "Socio actualizado.");
+    }
+
+    @Override
+    public String getDNINuevo() {
         return null;
     }
 
     @Override
-    public String getNombre() {
+    public String getNombreNuevo() {
         return null;
     }
 
     @Override
-    public String getApellido() {
+    public String getApellidoNuevo() {
         return null;
     }
 
     @Override
-    public int getAnyo() {
+    public int getAnyoNuevo() {
         return 0;
     }
 
     @Override
-    public Calendar getIngreso() {
+    public Calendar getIngresoNuevo() {
         return null;
     }
 
     @Override
     public String getDNIBorrar() {
-        return null;
+        return ventanaPrincipal.getDNIBorrado();
     }
 
     @Override
@@ -131,5 +148,30 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     @Override
     public Calendar getFechaPago() {
         return null;
+    }
+
+    @Override
+    public String getDnI() {
+        return ventanaPrincipal.getDNI();
+    }
+
+    @Override
+    public String getNombre() {
+        return ventanaPrincipal.getNombre();
+    }
+
+    @Override
+    public String getApellido() {
+        return ventanaPrincipal.getApellido();
+    }
+
+    @Override
+    public int getAnyo() {
+        return ventanaPrincipal.getAnyo();
+    }
+
+    @Override
+    public Calendar getIngreso() {
+        return ventanaPrincipal.getIngreso();
     }
 }

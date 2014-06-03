@@ -39,17 +39,32 @@ public class ImplementacionControlador implements Controlador {
         String dni,nombre,apellido;
         int anyo;
         Calendar ingreso;
-        dni = vista.getDNI();
+        dni = vista.getDNINuevo();
+        nombre = vista.getNombreNuevo();
+        apellido = vista.getApellidoNuevo();
+        anyo = vista.getAnyoNuevo();
+        ingreso = vista.getIngresoNuevo();
+        modelo.addSocio(dni,nombre,apellido,anyo,ingreso);
+    }
+
+    @Override
+    public void actualizarSocio() {
+        String dni,nombre,apellido;
+        int anyo;
+        Calendar ingreso;
+        dni = vista.getDnI();
         nombre = vista.getNombre();
         apellido = vista.getApellido();
         anyo = vista.getAnyo();
         ingreso = vista.getIngreso();
-        modelo.addSocio(dni,nombre,apellido,anyo,ingreso);
+        modelo.actualizarSocio(dni,nombre,apellido,anyo,ingreso);
+
     }
 
     @Override
     public void borrarSocio() {
         String dni = vista.getDNIBorrar();
+        System.out.println(dni);
         modelo.removeSocio(dni);
     }
 
