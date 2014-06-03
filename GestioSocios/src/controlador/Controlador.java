@@ -59,4 +59,9 @@ public class Controlador {
         Socio socio = gS.getSocio(dni);
         socio.setMayorEdad(boleano);
     }
+
+    public void nuevoSocio(String dni, String nombre, String apellido, boolean menor) {
+        Socio nSocio = new Socio(dni,nombre,apellido,menor);
+        gS.addSocio(nSocio);
+    }
 }

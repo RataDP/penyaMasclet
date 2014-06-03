@@ -2,8 +2,8 @@ package modelo;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by ratadp on 22/05/14.
@@ -27,7 +27,7 @@ public class Socio {
         this.mayorEdad = mayorEdad;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
-        this.pagos = new HashSet<Pago>();
+        this.pagos = new TreeSet<Pago>();
     }
 
     public Socio(String dni, String nombre, String apellido, boolean mayorEdad ) {
@@ -37,7 +37,7 @@ public class Socio {
         this.mayorEdad = mayorEdad;
         this.dni = dni;
         this.fechaIngreso = new GregorianCalendar();
-        this.pagos = new HashSet<Pago>();
+        this.pagos = new TreeSet<Pago>();
     }
 
     public String getNombre() {

@@ -10,7 +10,7 @@ public class GestorSocios {
 
     public GestorSocios() {
         super();
-        this.socios = new HashMap<String, Socio>();
+        this.socios = new TreeMap<String, Socio>();
     }
 
     public boolean isEmpty () {
