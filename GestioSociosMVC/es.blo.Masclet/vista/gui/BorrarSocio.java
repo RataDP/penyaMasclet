@@ -56,11 +56,11 @@ public class BorrarSocio extends Estilo {
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {
                 case "salir":
-                    dni = tDni.getText();
-                    controlador.borrarSocio();
                     dialog.dispose();
                     break;
                 case "escritoDNI":
+                    dni = tDni.getText();
+                    controlador.borrarSocio();
                     dialog.dispose();
             }
         }
