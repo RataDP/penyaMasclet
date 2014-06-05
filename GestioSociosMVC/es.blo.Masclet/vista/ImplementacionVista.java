@@ -107,27 +107,27 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
 
     @Override
     public String getDNINuevo() {
-        return null;
+        return ventanaPrincipal.getDNINuevo();
     }
 
     @Override
     public String getNombreNuevo() {
-        return null;
+        return ventanaPrincipal.getNombreNuevo();
     }
 
     @Override
     public String getApellidoNuevo() {
-        return null;
+        return ventanaPrincipal.getApellidoNuevo();
     }
 
     @Override
     public int getAnyoNuevo() {
-        return 0;
+        return ventanaPrincipal.getAnyoNuevo();
     }
 
     @Override
     public Calendar getIngresoNuevo() {
-        return null;
+        return ventanaPrincipal.getIngresoNuevo();
     }
 
     @Override

@@ -26,13 +26,16 @@ public class VentanaPrincipal extends Estilo {
     private List<Socio> listaSocios;
     private DefaultListModel<String> listaModelo;
     private int index;
-    private BorrarSocio borrarSocio;
+    private String dniBorrado;
+    private boolean seleccionado;
+    private NuevoSocio nuevoSocio;
 
     public VentanaPrincipal(JFrame frame, PreguntarModelo modelo, Controlador controlador) {
         this.frame = frame;
         this.modelo = modelo;
         this.controlador = controlador;
         this.listaSocios = modelo.listSocios();
+        this.seleccionado = false;
         ejecutar();
     }
 
@@ -186,10 +189,22 @@ public class VentanaPrincipal extends Estilo {
         }
     }
 
-    private void actualizarListaModelo(int index) {
-        Socio actualizado = listaSocios.get(index);
+    private void actualizarListaModelo(int indice) {
+        Socio actualizado = listaSocios.get(indice);
         String nuevoNombre = actualizado.getNombre() + " " + actualizado.getApellido();
-        listaModelo.set(index,nuevoNombre);
+        listaModelo.set(indice,nuevoNombre);
+    }
+
+    private void borrarDeLista(int indice) {
+        Socio borrar = listaSocios.get(indice);
+        String nombreBorrar = borrar.getNombre() + " " + borrar.getApellido();
+        listaModelo.removeElement(nombreBorrar);
+    }
+
+    private void anyadirListaModelo(String dni) {
+        Socio nuevo = modelo.getSocio(dni);
+        String nombreNuevo = nuevo.getNombre() + " " + nuevo.getApellido();
+        listaModelo.addElement(nombreNuevo);
     }
 
     public JFrame getFrame() {
@@ -217,7 +232,27 @@ public class VentanaPrincipal extends Estilo {
     }
 
     public String getDNIBorrado() {
-        return borrarSocio.getDNI();
+        return dniBorrado;
+    }
+
+    public String getDNINuevo() {
+        return nuevoSocio.getDni();
+    }
+
+    public String getNombreNuevo() {
+        return nuevoSocio.getNombre();
+    }
+
+    public String getApellidoNuevo() {
+        return nuevoSocio.getApellido();
+    }
+
+    public int getAnyoNuevo() {
+        return nuevoSocio.getAnyo();
+    }
+
+    public Calendar getIngresoNuevo() {
+        return nuevoSocio.getIngreso();
     }
 
     private class ListenerRaton extends MouseAdapter {
@@ -233,6 +268,7 @@ public class VentanaPrincipal extends Estilo {
                     tDni.setText(socio.getDni());
                     tAnyo.setText(String.valueOf(socio.getAnyoNacimiento()));
                     tAlta.setCalendar(socio.getFechaIngreso());
+                    seleccionado = true;
                 }
             }
         }
@@ -257,10 +293,19 @@ public class VentanaPrincipal extends Estilo {
                     break;
                 case "nuevosocio":
                     System.out.println(e.getActionCommand());
+                    nuevoSocio = new NuevoSocio(frame,controlador, modelo, listaModelo, listaSocios);
                     break;
                 case "borrarsocio":
-                    System.out.println(e.getActionCommand());
-                    borrarSocio = new BorrarSocio(frame, controlador);
+                    System.out.println(e.getActionCommand() + index);
+                    if (seleccionado) {
+                        borrarDeLista(index);
+                        Socio socio = listaSocios.get(index);
+                        dniBorrado = socio.getDni();
+                        controlador.borrarSocio();
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Socio no seleccionado", "Socio no seleccionado", JOptionPane.WARNING_MESSAGE);
+                        System.out.println("no seleccionado");
+                    }
                     break;
             }
         }
