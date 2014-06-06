@@ -288,7 +288,7 @@ public class VentanaPrincipal extends Estilo {
                     break;
                 case "salir":
                     System.out.println(e.getActionCommand());
-//                    controlador.guardarDatos();
+                    controlador.guardarDatos();
                     frame.dispose();
                     break;
                 case "nuevosocio":

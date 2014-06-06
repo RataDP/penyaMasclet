@@ -5,19 +5,20 @@ import modelo.clasesNegocio.Pago;
 import modelo.clasesNegocio.Socio;
 import vista.InformarVista;
 
+import java.io.*;
 import java.util.*;
 
 /**
  * Created by ratadp on 3/06/14.
  */
-public class ImplementacionModelo implements PreguntarModelo, ModificarModelo {
+public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, Serializable {
+    private static final long serialVersionUID = -8985753006142654544L;
     private GestorSocio gS;
     private InformarVista vista;
 
     public ImplementacionModelo() {
         super();
-        this.gS = new GestorSocio();
-        rellenarModelo();
+        this.gS = cargarDatos();
     }
 
     public void setVista(InformarVista vista) {
@@ -78,53 +79,53 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo {
 
     @Override
     public void guardarDatos() {
-//        ObjectOutputStream oos=null;
-//        try {
-//            try {
-//                FileOutputStream fos = new FileOutputStream("basedatos.bin");
-//                oos = new ObjectOutputStream(fos);
-//                oos.writeObject(gS);
-//            }
-//            finally {
-//                oos.close();
-//            }
-//        }
-//        catch(FileNotFoundException exc) {
-//            System.out.println("El fichero no existe.");
-//            exc.printStackTrace();
-//        }
-//        catch(IOException exc) {
-//            exc.printStackTrace();
-//        }
+        ObjectOutputStream oos=null;
+        try {
+            try {
+                FileOutputStream fos = new FileOutputStream("basedatos.bin");
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(gS);
+            }
+            finally {
+                oos.close();
+            }
+        }
+        catch(FileNotFoundException exc) {
+            System.out.println("El fichero no existe.");
+            exc.printStackTrace();
+        }
+        catch(IOException exc) {
+            exc.printStackTrace();
+        }
     }
 
     @Override
     public GestorSocio cargarDatos() {
-        return null;
-//        ObjectInputStream ois = null;
-//        GestorSocio gestor = null;
-//        try{
-//            try {
-//                FileInputStream fis = new FileInputStream("basedatos.bin");
-//                ois = new ObjectInputStream(fis);
-//                gestor = (GestorSocio)ois.readObject();
-//            }
-//            finally {
-//                if(ois != null) ois.close();
-//            }
-//        }
-//        catch(FileNotFoundException exc) {
-//            System.err.println("Fichero de datos no existe. Se crea una nueva base de datos.");
-//        }
-//        catch(IOException exc) {
-//            exc.printStackTrace();
-//        }
-//        catch(ClassNotFoundException exc) {
-//            exc.printStackTrace();
-//        }
-//        if (gestor == null)
-//            return new GestorSocio();
-//        return gestor;
+        ObjectInputStream ois = null;
+        GestorSocio gestor = null;
+        try{
+            try {
+                FileInputStream fis = new FileInputStream("basedatos.bin");
+                ois = new ObjectInputStream(fis);
+                gestor = (GestorSocio)ois.readObject();
+            }
+            finally {
+                if(ois != null) ois.close();
+            }
+        }
+        catch(FileNotFoundException exc) {
+            System.err.println("Fichero de datos no existe. Se crea una nueva base de datos.");
+        }
+        catch(IOException exc) {
+            exc.printStackTrace();
+        }
+        catch(ClassNotFoundException exc) {
+            System.out.println("ClassNotFound");
+            exc.printStackTrace();
+        }
+        if (gestor == null)
+            return new GestorSocio();
+        return gestor;
     }
 
     @Override
