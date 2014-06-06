@@ -1,7 +1,6 @@
 package modelo;
 
 import modelo.clasesNegocio.GestorSocio;
-import modelo.clasesNegocio.Pago;
 
 import java.util.Calendar;
 
@@ -15,7 +14,7 @@ public interface ModificarModelo {
 
     public void removeSocio(String dni);
 
-    public void addPago(String dni, Pago pago);
+    public void addPago(String dni, String descripcion, double importe, Calendar realizacion);
 
     public void guardarDatos();
 

@@ -136,18 +136,23 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     }
 
     @Override
+    public String getDNIPago() {
+        return ventanaPrincipal.getDNIPago();
+    }
+
+    @Override
     public String getDescripcionPago() {
-        return null;
+        return ventanaPrincipal.getDescripcionPago();
     }
 
     @Override
     public double getCantidadPago() {
-        return 0;
+        return ventanaPrincipal.getImportePago();
     }
 
     @Override
     public Calendar getFechaPago() {
-        return null;
+        return ventanaPrincipal.getFechaPago();
     }
 
     @Override

@@ -69,9 +69,11 @@ public class ImplementacionControlador implements Controlador {
 
     @Override
     public void nuevoPago() {
+        String dni = vista.getDNIPago();
         String descripcion = vista.getDescripcionPago();
         double cantidad = vista.getCantidadPago();
         Calendar fecha = vista.getFechaPago();
+        modelo.addPago(dni,descripcion,cantidad,fecha);
 
     }
 }

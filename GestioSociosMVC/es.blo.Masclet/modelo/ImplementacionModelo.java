@@ -69,15 +69,15 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
     }
 
     @Override
-    public void addPago(String dni, Pago pago) {
+    public void addPago(String dni, String descripcion, double importe, Calendar realizacion) {
         if (!gS.isSocio(dni))
             vista.socioNoEncontrado();
         else {
             Socio socio = gS.getSocio(dni);
+            Pago pago = new Pago(descripcion,importe,realizacion);
             socio.addPago(pago);
             vista.pagoAnyadido();
         }
-
     }
 
     @Override

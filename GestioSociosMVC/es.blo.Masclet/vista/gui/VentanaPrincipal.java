@@ -29,6 +29,7 @@ public class VentanaPrincipal extends Estilo {
     private String dniBorrado;
     private boolean seleccionado;
     private NuevoSocio nuevoSocio;
+    private Pagos ventanaPagos;
 
     public VentanaPrincipal(JFrame frame, PreguntarModelo modelo, Controlador controlador) {
         this.frame = frame;
@@ -79,57 +80,39 @@ public class VentanaPrincipal extends Estilo {
         tNom = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 0;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(tNom,constraints);
         JLabel lApellido = new JLabel("Apellido:");
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(lApellido,constraints);
         tApellido = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 1;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(tApellido,constraints);
         JLabel lDni = new JLabel("DNI:");
         constraints.gridx = 0;
         constraints.gridy = 2;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(lDni,constraints);
         tDni = new JTextField(15);
         tDni.setEditable(false);
         constraints.gridx = 1;
         constraints.gridy = 2;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(tDni,constraints);
         JLabel lAnyo = new JLabel("Año de Nacimiento:");
         constraints.gridx = 0;
         constraints.gridy = 3;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(lAnyo,constraints);
         tAnyo = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 3;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(tAnyo,constraints);
         JLabel lAlta = new JLabel("Fecha de alta");
         constraints.gridx = 0;
         constraints.gridy = 4;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(lAlta,constraints);
-        tAlta = new JDateChooser("dd / MM / yy","## / ## / ##",'_');
+        tAlta = new JDateChooser("dd / MM / yy","## / ## / ##",' ');
         constraints.gridx = 1;
         constraints.gridy = 4;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
         centro.add(tAlta,constraints);
         izq.add(centro,BorderLayout.CENTER);
 
@@ -201,11 +184,11 @@ public class VentanaPrincipal extends Estilo {
         listaModelo.removeElement(nombreBorrar);
     }
 
-    private void anyadirListaModelo(String dni) {
-        Socio nuevo = modelo.getSocio(dni);
-        String nombreNuevo = nuevo.getNombre() + " " + nuevo.getApellido();
-        listaModelo.addElement(nombreNuevo);
-    }
+//    private void anyadirListaModelo(String dni) {
+//        Socio nuevo = modelo.getSocio(dni);
+//        String nombreNuevo = nuevo.getNombre() + " " + nuevo.getApellido();
+//        listaModelo.addElement(nombreNuevo);
+//    }
 
     public JFrame getFrame() {
         return frame;
@@ -255,6 +238,22 @@ public class VentanaPrincipal extends Estilo {
         return nuevoSocio.getIngreso();
     }
 
+    public String getDescripcionPago() {
+        return ventanaPagos.getDescripcion();
+    }
+
+    public double getImportePago() {
+        return ventanaPagos.getImporte();
+    }
+
+    public Calendar getFechaPago() {
+        return ventanaPagos.getFecha();
+    }
+
+    public String getDNIPago() {
+        return ventanaPagos.getDNI();
+    }
+
     private class ListenerRaton extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
@@ -285,6 +284,7 @@ public class VentanaPrincipal extends Estilo {
                     break;
                 case "pagos":
                     System.out.println(e.getActionCommand());
+                    ventanaPagos = new Pagos(controlador,listaSocios.get(index));
                     break;
                 case "salir":
                     System.out.println(e.getActionCommand());

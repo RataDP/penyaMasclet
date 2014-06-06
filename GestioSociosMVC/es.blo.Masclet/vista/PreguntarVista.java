@@ -18,6 +18,8 @@ public interface PreguntarVista {
 
     public String getDNIBorrar();
 
+    public String getDNIPago();
+
     public String getDescripcionPago();
 
     public double getCantidadPago();
