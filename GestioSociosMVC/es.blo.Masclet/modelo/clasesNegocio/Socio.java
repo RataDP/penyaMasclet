@@ -1,9 +1,9 @@
 package modelo.clasesNegocio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
 
 /**
  * Created by ratadp on 3/06/14.
@@ -13,7 +13,7 @@ public class Socio implements Serializable {
     private String nombre,apellido,dni;
     private int anyoNacimiento;
     private Calendar fechaIngreso;
-    private Set<Pago> pagos;
+    private List<Pago> pagos;
 
     public Socio() {
         super();
@@ -26,7 +26,7 @@ public class Socio implements Serializable {
         this.apellido = apellido;
         this.anyoNacimiento = anyo;
         this.fechaIngreso = fechaIngreso;
-        this.pagos = new TreeSet<>();
+        this.pagos = new ArrayList<>();
     }
 
     public void setNombre(String nombre) {
@@ -65,7 +65,7 @@ public class Socio implements Serializable {
         return fechaIngreso;
     }
 
-    public Set<Pago> getPagos() {
+    public List<Pago> getPagos() {
         return pagos;
     }
 

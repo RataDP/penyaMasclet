@@ -6,7 +6,10 @@ import modelo.clasesNegocio.Socio;
 import vista.InformarVista;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by ratadp on 3/06/14.
@@ -173,10 +176,9 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
         List<Pago> lista = new ArrayList<>();
         if (!isEmpty()) {
             Socio socio = getSocio(dni);
-            Set<Pago> pagos = socio.getPagos();
-            Iterator<Pago> iter = pagos.iterator();
-            while (iter.hasNext())
-                lista.add(iter.next());
+            List<Pago> pagos = socio.getPagos();
+            for (Pago pago: pagos)
+                lista.add(pago);
         }
         return lista;
     }
