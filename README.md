@@ -10,8 +10,8 @@ Aplicación para la gestión de los socios de la Penya El Masclet.
 - [x] Diseño básico de toda la aplicación.
 - [x] Mensaje de bienvenida.
 - [x] Apariencia básica de la lista y modificación de socios. 
-- [ ] MenuBar de la lista y modificación de socios.
-- [ ] Apariencia completa de la lista y modificación de socios.
+- [x] MenuBar de la lista y modificación de socios.
+- [x] Apariencia completa de la lista y modificación de socios.
 - [ ] Básico sobre la gestión de pagos.
 - [ ] MenuBar de la gestión de pagos.
 - [ ] Apariencia completa de gestión de pagos.
