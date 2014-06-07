@@ -150,11 +150,9 @@ public class Pagos extends Estilo{
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {
                 case "salir":
-                    System.out.println(e.getActionCommand());
                     frame.dispose();
                     break;
                 case "guardar":
-                    System.out.println(e.getActionCommand());
                     controlador.nuevoPago();
                     aumentarLista();
                     break;

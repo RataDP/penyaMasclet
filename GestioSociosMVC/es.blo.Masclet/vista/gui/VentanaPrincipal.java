@@ -282,23 +282,18 @@ public class VentanaPrincipal extends Estilo {
                 case "actualizar":
                     controlador.actualizarSocio();
                     actualizarListaModelo(index);
-                    System.out.println(e.getActionCommand());
                     break;
                 case "pagos":
-                    System.out.println(e.getActionCommand());
                     ventanaPagos = new Pagos(controlador,listaSocios.get(index));
                     break;
                 case "salir":
-                    System.out.println(e.getActionCommand());
                     controlador.guardarDatos();
                     frame.dispose();
                     break;
                 case "nuevosocio":
-                    System.out.println(e.getActionCommand());
                     nuevoSocio = new NuevoSocio(frame,controlador, modelo, listaModelo, listaSocios);
                     break;
                 case "borrarsocio":
-                    System.out.println(e.getActionCommand() + index);
                     if (seleccionado) {
                         borrarDeLista(index);
                         Socio socio = listaSocios.get(index);
@@ -306,7 +301,6 @@ public class VentanaPrincipal extends Estilo {
                         controlador.borrarSocio();
                     } else {
                         JOptionPane.showMessageDialog(frame, "Socio no seleccionado", "Socio no seleccionado", JOptionPane.WARNING_MESSAGE);
-                        System.out.println("no seleccionado");
                     }
                     break;
             }
