@@ -134,6 +134,8 @@ public class VentanaPrincipal extends Estilo {
 
         //MENU
         JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(getColorFondo());
+        frame.setJMenuBar(menuBar);
 
         JMenu menuCl = new JMenu("<html><u>S</u>ocios</html>");
         menuCl.getAccessibleContext().setAccessibleDescription("Menú para la gestión de socios.");
@@ -145,13 +147,23 @@ public class VentanaPrincipal extends Estilo {
         menuBorrarSocio.setActionCommand("borrarsocio");
         menuCl.add(menuBorrarSocio);
 
+        JMenu menuListados = new JMenu("<html><u>L</u>istados</html>");
+        menuListados.getAccessibleContext().setAccessibleDescription("Menú para la elección de diferentes listados.");
+        JMenuItem mSociosTotales = new JMenuItem("Socios totales");
+        mSociosTotales.setActionCommand("sociostotales");
+        menuListados.add(mSociosTotales);
+        JMenuItem mListMenores = new JMenuItem("Listado Menores");
+        mListMenores.setActionCommand("listadomenores");
+        menuListados.add(mListMenores);
+        menuBar.add(menuListados);
+
         JMenu menuAyuda = new JMenu("<html><u>A</u>yuda</html>");
         menuAyuda.getAccessibleContext().setAccessibleDescription("Menú de ayuda.");
         menuBar.add(menuAyuda);
         JMenuItem menuAbout = new JMenuItem("Sobre");
         menuAbout.setActionCommand("sobre");
         menuAyuda.add(menuAbout);
-        frame.setJMenuBar(menuBar);
+
 
         //LISTENERS
         // MOUSE LISTENER
@@ -165,6 +177,8 @@ public class VentanaPrincipal extends Estilo {
         menuNuevoSocio.addActionListener(listenerAccion);
         menuBorrarSocio.addActionListener(listenerAccion);
         menuAbout.addActionListener(listenerAccion);
+        mListMenores.addActionListener(listenerAccion);
+        mSociosTotales.addActionListener(listenerAccion);
 
 
         frame.setContentPane(trabajo);
@@ -308,6 +322,12 @@ public class VentanaPrincipal extends Estilo {
                     break;
                 case "sobre":
                     new About().ejecutar();
+                    break;
+                case "sociostotales":
+                    new SociosTotales(frame,modelo);
+                    break;
+                case "listadomenores":
+                    new ListadoMenores(frame,modelo);
                     break;
             }
         }

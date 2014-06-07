@@ -189,4 +189,17 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
         }
         return lista;
     }
+
+    @Override
+    public List<Socio> listSociosMenores(int anyoActual) {
+        List<Socio> lista = new ArrayList<>();
+        if (!isEmpty()) {
+            List<Socio> socios = gS.listSocios();
+            for (Socio socio: socios) {
+                if (anyoActual - socio.getAnyoNacimiento() <=18)
+                    lista.add(socio);
+            }
+        }
+        return lista;
+    }
 }

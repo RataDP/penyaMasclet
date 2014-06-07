@@ -22,4 +22,6 @@ public interface PreguntarModelo {
     public List<Socio> listSocios();
 
     public List<Pago> listPagosSocio(String dni);
+
+    public List<Socio> listSociosMenores(int anyoActual);
 }
