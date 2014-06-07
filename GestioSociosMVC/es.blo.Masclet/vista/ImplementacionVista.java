@@ -106,6 +106,11 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     }
 
     @Override
+    public void ficheroNoEncontrado() {
+        JOptionPane.showMessageDialog(frame,"Fichero de datos, basedatos.bin, no encontrado.","Fichero no encontrado", JOptionPane.WARNING_MESSAGE);
+    }
+
+    @Override
     public String getDNINuevo() {
         return ventanaPrincipal.getDNINuevo();
     }

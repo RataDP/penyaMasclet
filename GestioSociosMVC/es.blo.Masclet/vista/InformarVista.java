@@ -19,4 +19,6 @@ public interface InformarVista {
     public void bdVacia();
 
     public void socioActualizado();
+
+    public void ficheroNoEncontrado();
 }

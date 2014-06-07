@@ -94,7 +94,7 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
             }
         }
         catch(FileNotFoundException exc) {
-            System.out.println("El fichero no existe.");
+            vista.ficheroNoEncontrado();
             exc.printStackTrace();
         }
         catch(IOException exc) {
@@ -117,7 +117,7 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
             }
         }
         catch(FileNotFoundException exc) {
-            System.err.println("Fichero de datos no existe. Se crea una nueva base de datos.");
+            vista.ficheroNoEncontrado();
         }
         catch(IOException exc) {
             exc.printStackTrace();
