@@ -100,7 +100,7 @@ public class NuevoSocio extends Estilo{
                     break;
                 case "crear":
                     boolean nuevoBool = true;
-                    if (modelo.isSocio(tDni.getText()))
+                    if (modelo.isSocioSinAviso(tDni.getText()))
                         nuevoBool = false;
                     controlador.nuevoSocio();
                     if (nuevoBool) {

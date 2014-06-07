@@ -157,6 +157,13 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
     }
 
     @Override
+    public boolean isSocioSinAviso(String dni) {
+        if (!gS.isEmpty())
+            return gS.isSocio(dni);
+        return false;
+    }
+
+    @Override
     public Socio getSocio(String dni) {
         if (isSocio(dni))
             return gS.getSocio(dni);

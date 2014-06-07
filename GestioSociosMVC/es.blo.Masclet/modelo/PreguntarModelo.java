@@ -15,6 +15,8 @@ public interface PreguntarModelo {
 
     public boolean isSocio(String dni);
 
+    public boolean isSocioSinAviso(String dni);
+
     public Socio getSocio(String dni);
 
     public List<Socio> listSocios();
