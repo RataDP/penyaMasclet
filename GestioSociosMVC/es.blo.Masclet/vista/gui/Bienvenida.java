@@ -44,7 +44,8 @@ public class Bienvenida extends Estilo {
         frame.setContentPane(trabajo);
 //        frame.pack();
         frame.setSize(600, 250);
-        frame.setBounds(150,100,600,250);
+        frame.setLocation(375,175);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

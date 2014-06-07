@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by ratadp on 6/06/14.
@@ -19,9 +20,8 @@ public class Pagos extends Estilo{
     private Controlador controlador;
     private Socio socio;
     private DefaultListModel<String> pagosModel;
-    private JTextArea tDescripcion;
     private JDateChooser tFecha;
-    private JTextField tPrecio;
+    private JTextField tPrecio,tDescripcion;
 
 
     public Pagos(Controlador controlador, Socio socio) {
@@ -56,15 +56,15 @@ public class Pagos extends Estilo{
         constraints.gridwidth = 1;
         centro.add(lSocio,constraints);
         JLabel lNombre = new JLabel("<html><h3>" + socio.getNombre() + " " + socio.getApellido() + "</h3></html>");
-        lNombre.setFont(getMono());
+        lNombre.setFont(getSansS());
         constraints.gridx = 1;
         constraints.gridy = 0;
         centro.add(lNombre,constraints);
-        JLabel lDescripcion = new JLabel("Descripción:");
+        JLabel lDescripcion = new JLabel("Descripción: ");
         constraints.gridx = 0;
         constraints.gridy = 1;
         centro.add(lDescripcion,constraints);
-        tDescripcion = new JTextArea(2,15);
+        tDescripcion = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 1;
         centro.add(tDescripcion,constraints);
@@ -80,7 +80,7 @@ public class Pagos extends Estilo{
         constraints.gridx = 0;
         constraints.gridy = 3;
         centro.add(lFecha,constraints);
-        tFecha = new JDateChooser("dd/MM/yy","##/##/##", ' ');
+        tFecha = new JDateChooser(new Date(),"dd/MM/yy");
         constraints.gridx = 1;
         constraints.gridy = 3;
         centro.add(tFecha,constraints);
@@ -114,8 +114,10 @@ public class Pagos extends Estilo{
 
         frame.setContentPane(trabajo);
         frame.pack();
+        frame.setLocation(165,65);
 //        frame.setSize(575,300);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,7 +59,8 @@ public class NuevoSocio extends Estilo{
         center.add(tAnyo);
         JLabel lIngreso = new JLabel("Fecha de ingreso:");
         center.add(lIngreso);
-        tIngreso = new JDateChooser("dd/MM/yy","##/##/##",'_');
+//        tIngreso = new JDateChooser("dd/MM/yy","##/##/##",'_');
+        tIngreso = new JDateChooser(new Date(),"dd/MM/yy");
         center.add(tIngreso);
         trabajo.add(center);
 
@@ -79,7 +81,9 @@ public class NuevoSocio extends Estilo{
 
 
         dialog.setContentPane(trabajo);
+        dialog.setLocation(165,65);
         dialog.pack();
+        dialog.setResizable(false);
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);
     }

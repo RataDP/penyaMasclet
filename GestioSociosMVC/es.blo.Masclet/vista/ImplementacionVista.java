@@ -40,7 +40,7 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     public void crearGUI() {
         welcome.ejecutar();
         try {
-            sleep(1000);
+            sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

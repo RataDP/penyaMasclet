@@ -110,7 +110,7 @@ public class VentanaPrincipal extends Estilo {
         constraints.gridx = 0;
         constraints.gridy = 4;
         centro.add(lAlta,constraints);
-        tAlta = new JDateChooser("dd / MM / yy","## / ## / ##",' ');
+        tAlta = new JDateChooser("dd/MM/yy","##/##/##",' ');
         constraints.gridx = 1;
         constraints.gridy = 4;
         centro.add(tAlta,constraints);
@@ -134,7 +134,7 @@ public class VentanaPrincipal extends Estilo {
 
         //MENU
         JMenuBar menuBar = new JMenuBar();
-        JMenu menuCl = new JMenu("Gestión Socios");
+        JMenu menuCl = new JMenu("<html><u>S</u>ocios</html>");
         menuCl.getAccessibleContext().setAccessibleDescription("Menú para la gestión de socios");
         menuBar.add(menuCl);
         JMenuItem menuNuevoSocio = new JMenuItem("Nuevo socio");
@@ -161,6 +161,8 @@ public class VentanaPrincipal extends Estilo {
         frame.setContentPane(trabajo);
 //        frame.pack();
         frame.setSize(600, 423);
+        frame.setLocation(150,50);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
