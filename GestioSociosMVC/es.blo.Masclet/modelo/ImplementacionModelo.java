@@ -117,7 +117,7 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
             }
         }
         catch(FileNotFoundException exc) {
-            vista.ficheroNoEncontrado();
+            System.err.println("Fichero no encontrado.");
         }
         catch(IOException exc) {
             exc.printStackTrace();
