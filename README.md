@@ -16,7 +16,7 @@ Aplicación para la gestión de los socios de la Penya El Masclet.
 - [x] Básico sobre la gestión de pagos.
 - [x] Apariencia completa de gestión de pagos.
 - [ ] Interfaz para el guardado y carga de ficheros.
-- [ ] Funcionamiento completo de la aplicación.
+- [x] Funcionamiento completo de la aplicación.
 - [ ] Añadir años a la lista de socios.
 - [ ] Funcionamiento de los años.
 - [ ] Programa completo!
