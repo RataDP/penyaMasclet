@@ -134,8 +134,9 @@ public class VentanaPrincipal extends Estilo {
 
         //MENU
         JMenuBar menuBar = new JMenuBar();
+
         JMenu menuCl = new JMenu("<html><u>S</u>ocios</html>");
-        menuCl.getAccessibleContext().setAccessibleDescription("Menú para la gestión de socios");
+        menuCl.getAccessibleContext().setAccessibleDescription("Menú para la gestión de socios.");
         menuBar.add(menuCl);
         JMenuItem menuNuevoSocio = new JMenuItem("Nuevo socio");
         menuNuevoSocio.setActionCommand("nuevosocio");
@@ -143,6 +144,13 @@ public class VentanaPrincipal extends Estilo {
         JMenuItem menuBorrarSocio = new JMenuItem("Borrar socio");
         menuBorrarSocio.setActionCommand("borrarsocio");
         menuCl.add(menuBorrarSocio);
+
+        JMenu menuAyuda = new JMenu("<html><u>A</u>yuda</html>");
+        menuAyuda.getAccessibleContext().setAccessibleDescription("Menú de ayuda.");
+        menuBar.add(menuAyuda);
+        JMenuItem menuAbout = new JMenuItem("Sobre");
+        menuAbout.setActionCommand("sobre");
+        menuAyuda.add(menuAbout);
         frame.setJMenuBar(menuBar);
 
         //LISTENERS
@@ -156,12 +164,13 @@ public class VentanaPrincipal extends Estilo {
         bSalir.addActionListener(listenerAccion);
         menuNuevoSocio.addActionListener(listenerAccion);
         menuBorrarSocio.addActionListener(listenerAccion);
+        menuAbout.addActionListener(listenerAccion);
 
 
         frame.setContentPane(trabajo);
 //        frame.pack();
         frame.setSize(600, 423);
-        frame.setLocation(150,50);
+        frame.setLocation(150, 50);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -185,12 +194,6 @@ public class VentanaPrincipal extends Estilo {
         String nombreBorrar = borrar.getNombre() + " " + borrar.getApellido();
         listaModelo.removeElement(nombreBorrar);
     }
-
-//    private void anyadirListaModelo(String dni) {
-//        Socio nuevo = modelo.getSocio(dni);
-//        String nombreNuevo = nuevo.getNombre() + " " + nuevo.getApellido();
-//        listaModelo.addElement(nombreNuevo);
-//    }
 
     public JFrame getFrame() {
         return frame;
@@ -302,6 +305,9 @@ public class VentanaPrincipal extends Estilo {
                     } else {
                         JOptionPane.showMessageDialog(frame, "Socio no seleccionado", "Socio no seleccionado", JOptionPane.WARNING_MESSAGE);
                     }
+                    break;
+                case "sobre":
+                    new About().ejecutar();
                     break;
             }
         }
