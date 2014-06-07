@@ -99,11 +99,16 @@ public class NuevoSocio extends Estilo{
                     dialog.dispose();
                     break;
                 case "crear":
+                    boolean nuevoBool = true;
+                    if (modelo.isSocio(tDni.getText()))
+                        nuevoBool = false;
                     controlador.nuevoSocio();
-                    Socio nuevo = modelo.getSocio(getDni());
-                    listaSocio.add(nuevo);
-                    String nombreNuevo = nuevo.getNombre() + " " + nuevo.getApellido();
-                    listaModel.addElement(nombreNuevo);
+                    if (nuevoBool) {
+                        Socio nuevo = modelo.getSocio(getDni());
+                        listaSocio.add(nuevo);
+                        String nombreNuevo = nuevo.getNombre() + " " + nuevo.getApellido();
+                        listaModel.addElement(nombreNuevo);
+                    }
                     dialog.dispose();
                     break;
             }
