@@ -25,4 +25,6 @@ public interface InformarVista {
     public void ficheroCargado();
 
     public void ficheroGuardado();
+
+    public void ficheroTexto();
 }

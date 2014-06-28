@@ -39,7 +39,7 @@ public class VentanaPrincipal extends Estilo {
         this.controlador = controlador;
         this.listaSocios = modelo.listSocios();
         this.seleccionado = false;
-        this.filtro = new FileNameExtensionFilter("BIN", "bin");
+        this.filtro = new FileNameExtensionFilter("Archivo Binario (.bin)", "bin");
         ejecutar();
     }
 

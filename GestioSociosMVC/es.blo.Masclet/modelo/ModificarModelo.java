@@ -24,4 +24,6 @@ public interface ModificarModelo {
     public void guardarArchivo(File archivo);
 
     public void cargarArchivo(File archivo);
+
+    public void exportarPagos(String dni);
 }

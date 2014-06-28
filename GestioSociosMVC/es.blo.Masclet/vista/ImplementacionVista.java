@@ -113,12 +113,19 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
 
     @Override
     public void ficheroCargado() {
-        JOptionPane.showMessageDialog(frame,"Fichero cargado", "fich cargado", JOptionPane.INFORMATION_MESSAGE);
+        String nombre = getFileCargar().getName();
+        JOptionPane.showMessageDialog(frame,"Fichero, " + nombre + ", cargado", "Fichero cargado", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void ficheroGuardado() {
-        JOptionPane.showMessageDialog(frame,"Fichero guardado", "fich guardado", JOptionPane.INFORMATION_MESSAGE);
+        String nombre = getFileGuardar().getName();
+        JOptionPane.showMessageDialog(frame,"Fichero guardado, con nombre " + nombre, "Fichero guardado", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void ficheroTexto() {
+        JOptionPane.showMessageDialog(frame,"Fichero exportado", "Fichero exportado", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -204,5 +211,10 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     @Override
     public File getFileCargar() {
         return ventanaPrincipal.getFileCargar();
+    }
+
+    @Override
+    public String getSocioExportarPago() {
+        return ventanaPrincipal.getDNIPago();
     }
 }

@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -107,10 +108,24 @@ public class Pagos extends Estilo{
         sur.add(bSalir,BorderLayout.EAST);
         trabajo.add(sur,BorderLayout.SOUTH);
 
+        // MENU
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(getColorFondo());
+        frame.setJMenuBar(menuBar);
+
+        JMenu archivo = new JMenu("Archivo");
+        menuBar.add(archivo);
+        JMenuItem exportar = new JMenuItem("Exportar a texto");
+        exportar.setActionCommand("exportar");
+        exportar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,Event.CTRL_MASK));
+        exportar.setMnemonic(KeyEvent.VK_F2);
+        archivo.add(exportar);
+
         // LISTENER
         AccionListener listener = new AccionListener();
         bGuardar.addActionListener(listener);
         bSalir.addActionListener(listener);
+        exportar.addActionListener(listener);
 
         frame.setContentPane(trabajo);
         frame.pack();
@@ -156,6 +171,9 @@ public class Pagos extends Estilo{
                 case "guardar":
                     controlador.nuevoPago();
                     aumentarLista();
+                    break;
+                case "exportar":
+                    controlador.exportarPagos();
                     break;
             }
         }

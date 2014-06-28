@@ -144,7 +144,7 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
         try {
             try {
                 archivoAnterior = archivo;
-                FileOutputStream fos = new FileOutputStream(archivo);
+                FileOutputStream fos = new FileOutputStream(archivo + ".bin");
                 oos = new ObjectOutputStream(fos);
                 oos.writeObject(gS);
             }
@@ -190,6 +190,28 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
             exc.printStackTrace();
         }
         vista.ficheroCargado();
+    }
+
+    @Override
+    public void exportarPagos(String dni) {
+        PrintWriter outputStream;
+        Socio socio = gS.getSocio(dni);
+        List<Pago> lista = socio.getPagos();
+        try {
+            outputStream = new PrintWriter("Pagos" + dni + ".txt");
+        double importeTotal = 0.0;
+        StringBuilder sb = new StringBuilder("Lista de pagos del socio (" + dni + ") " + socio.getNombre() + " " + socio.getApellido() +"\n");
+        for (Pago pago: lista) {
+            sb.append("\t" + pago + "\n");
+            importeTotal += pago.getImporte();
+        }
+        sb.append("Con " + lista.size() + " pagos, con un total recaudado de " + importeTotal + "€");
+        outputStream.println(sb.toString());
+        outputStream.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("fichero no existe");
+        }
+        vista.ficheroTexto();
     }
 
     @Override

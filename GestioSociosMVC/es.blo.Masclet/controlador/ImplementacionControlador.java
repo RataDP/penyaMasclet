@@ -89,4 +89,10 @@ public class ImplementacionControlador implements Controlador {
         modelo.addPago(dni,descripcion,cantidad,fecha);
 
     }
+
+    @Override
+    public void exportarPagos() {
+       String socio = vista.getSocioExportarPago();
+       modelo.exportarPagos(socio);
+    }
 }

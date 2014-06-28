@@ -19,4 +19,6 @@ public interface Controlador {
     public void borrarSocio();
 
     public void nuevoPago();
+
+    public void exportarPagos();
 }

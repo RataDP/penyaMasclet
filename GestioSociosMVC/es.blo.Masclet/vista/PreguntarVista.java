@@ -40,4 +40,6 @@ public interface PreguntarVista {
     public File getFileGuardar();
 
     public File getFileCargar();
+
+    public String getSocioExportarPago();
 }

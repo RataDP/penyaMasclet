@@ -30,4 +30,10 @@ public class Pago implements Serializable {
     public Calendar getFecha() {
         return fecha;
     }
+
+    @Override
+    public String toString() {
+        String data = fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR);
+        return getDescripcion() + ", importe: " + getImporte() + "€, con fecha " + data;
+    }
 }

@@ -32,7 +32,7 @@ public class About extends Estilo {
         nombreApp.setFont(getSansS());
         izq.add(nombreApp);
 
-        JLabel titulo = new JLabel("<html><b>Versión: 0.02</b><br>" +
+        JLabel titulo = new JLabel("<html><b>Versión: 0.03</b><br>" +
                 "Desarrollado por <i>Borja Blasco García</i> (RataDP)<br>" +
                 "Programa para la gestión de socios de la Peña El Masclet y sus pagos.<br><br>" +
                 "La aplicación aún esta siendo desarrollada para mejorar ciertos aspectos y añadir funcionalidades.</html>");
