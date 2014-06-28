@@ -4,6 +4,7 @@ Penya El Masclet
 ![logo](/GestioSocios/src/resources/logo.png)
 
 Aplicación para la gestión de los socios de la Penya El Masclet.
+La aplicación esta compilada con ~~Java8~~ Java7.
 
 ============
 ##Task
@@ -16,13 +17,12 @@ Aplicación para la gestión de los socios de la Penya El Masclet.
 - [x] Básico sobre la gestión de pagos.
 - [x] Apariencia completa de gestión de pagos.
 - [x] Funcionamiento básico de la aplicación.
-- [ ] Interfaz para el guardado y carga de ficheros.
+- [x] Interfaz para el guardado y carga de ficheros.
 - [x] Opciones sobre el listado.
     - [x] Listado de menores.
     - [x] Número total de socios.
-- [ ] Funcionamiento completo de la aplicación.
-- [ ] Añadir años a la lista de socios.
-- [ ] Funcionamiento de los años.
+- [x] Añadir icono a la aplicación.
+- [x] Funcionamiento completo de la aplicación.
 - [ ] Programa completo!
 
 ============
@@ -30,26 +30,10 @@ Aplicación para la gestión de los socios de la Penya El Masclet.
 En el módulo hay una clase abstracta de la cual extienden todas las ventanas, tiene 3 métodos, una con el color usado de fondo y dos tipos de fonts, proximamente añadire más para mejorar la apariencia de la aplicación.
 ```java
 public abstract class Estilo {
-    private Color color;
-    private Font sansS;
-    private Font mono;
-
-    public Estilo() {
-        this.color = new Color(246,246,246);
-        this.mono = new Font("Monospaced",Font.PLAIN,10);
-        this.sansS = new Font("SansSerif",Font.PLAIN,10);
-    }
-
-    public Color getColorFondo() {
-        return color;
-    }
-
-    public Font getSansS() {
-        return sansS;
-    }
-
-    public Font getMono() {
-        return mono;
-    }
+    public Estilo();
+    public Color getColorFondo();
+    public Font getSansS();
+    public Font getMono();
+    public Image getIcon();
 }
 ```
