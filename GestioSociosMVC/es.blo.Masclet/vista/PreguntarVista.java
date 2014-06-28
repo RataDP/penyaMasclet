@@ -1,5 +1,6 @@
 package vista;
 
+import java.io.File;
 import java.util.Calendar;
 
 /**
@@ -35,4 +36,8 @@ public interface PreguntarVista {
     public int getAnyo();
 
     public Calendar getIngreso();
+
+    public File getFileGuardar();
+
+    public File getFileCargar();
 }

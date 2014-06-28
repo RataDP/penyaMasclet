@@ -8,6 +8,10 @@ public interface Controlador {
 
     public void cargarDatos();
 
+    public void cargarArchivo();
+
+    public void guardarArchivo();
+
     public void nuevoSocio();
 
     public void actualizarSocio();

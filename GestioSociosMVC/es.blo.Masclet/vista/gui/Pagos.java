@@ -117,6 +117,7 @@ public class Pagos extends Estilo{
         frame.setLocation(165,65);
 //        frame.setSize(575,300);
         frame.setResizable(false);
+        frame.setIconImage(getIcon());
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }

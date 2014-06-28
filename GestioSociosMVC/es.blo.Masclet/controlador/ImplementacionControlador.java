@@ -3,6 +3,7 @@ package controlador;
 import modelo.ModificarModelo;
 import vista.PreguntarVista;
 
+import java.io.File;
 import java.util.Calendar;
 
 /**
@@ -32,6 +33,18 @@ public class ImplementacionControlador implements Controlador {
     @Override
     public void cargarDatos() {
         modelo.cargarDatos();
+    }
+
+    @Override
+    public void cargarArchivo() {
+        File archivo = vista.getFileCargar();
+        modelo.cargarArchivo(archivo);
+    }
+
+    @Override
+    public void guardarArchivo() {
+        File archivo = vista.getFileGuardar();
+        modelo.guardarArchivo(archivo);
     }
 
     @Override

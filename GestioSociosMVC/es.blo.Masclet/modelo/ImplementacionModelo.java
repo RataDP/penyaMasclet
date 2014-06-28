@@ -18,10 +18,12 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
     private static final long serialVersionUID = -8985753006142654544L;
     private GestorSocio gS;
     private InformarVista vista;
+    private File archivoAnterior;
 
     public ImplementacionModelo() {
         super();
         this.gS = cargarDatos();
+        this.archivoAnterior = null;
     }
 
     public void setVista(InformarVista vista) {
@@ -85,9 +87,14 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
         ObjectOutputStream oos=null;
         try {
             try {
-                FileOutputStream fos = new FileOutputStream("basedatos.bin");
+                FileOutputStream fos;
+                if ( archivoAnterior == null )
+                    fos = new FileOutputStream("basedatos.bin");
+                else
+                    fos = new FileOutputStream(archivoAnterior);
                 oos = new ObjectOutputStream(fos);
                 oos.writeObject(gS);
+
             }
             finally {
                 oos.close();
@@ -129,6 +136,60 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
         if (gestor == null)
             return new GestorSocio();
         return gestor;
+    }
+
+    @Override
+    public void guardarArchivo(File archivo) {
+        ObjectOutputStream oos=null;
+        try {
+            try {
+                archivoAnterior = archivo;
+                FileOutputStream fos = new FileOutputStream(archivo);
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(gS);
+            }
+            finally {
+                oos.close();
+            }
+        }
+        catch(FileNotFoundException exc) {
+            vista.ficheroNoEncontrado();
+            exc.printStackTrace();
+        }
+        catch(IOException exc) {
+            exc.printStackTrace();
+        }
+        vista.ficheroGuardado();
+    }
+
+    @Override
+    public void cargarArchivo(File archivo) {
+        ObjectInputStream ois = null;
+        GestorSocio gestor = null;
+        try{
+            try {
+                archivoAnterior = archivo;
+                FileInputStream fis = new FileInputStream(archivo);
+                ois = new ObjectInputStream(fis);
+                gestor = (GestorSocio)ois.readObject();
+            }
+            finally {
+                if(ois != null) ois.close();
+                if ( gestor != null)
+                    gS = gestor;
+            }
+        }
+        catch(FileNotFoundException exc) {
+            System.err.println("Fichero no encontrado.");
+        }
+        catch(IOException exc) {
+            exc.printStackTrace();
+        }
+        catch(ClassNotFoundException exc) {
+            System.out.println("ClassNotFound");
+            exc.printStackTrace();
+        }
+        vista.ficheroCargado();
     }
 
     @Override

@@ -19,6 +19,7 @@ public class ListadoMenores extends Estilo {
     private PreguntarModelo modelo;
     private Calendar fechaActual;
     private int nMenores, nMenoresNoSeguros;
+    private JButton volver;
 
     public ListadoMenores(JFrame frame, PreguntarModelo modelo) {
         this.dialog = new JDialog(frame,"Listado de menores");
@@ -51,7 +52,7 @@ public class ListadoMenores extends Estilo {
         JPanel sur = new JPanel(new BorderLayout());
         sur.setBackground(getColorFondo());
         sur.setBorder(BorderFactory.createEmptyBorder());
-        JButton volver = new JButton("Volver");
+        volver = new JButton("Volver");
         sur.add(volver,BorderLayout.EAST);
         trabajo.add(sur,BorderLayout.SOUTH);
 

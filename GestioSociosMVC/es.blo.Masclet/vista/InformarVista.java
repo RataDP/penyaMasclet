@@ -21,4 +21,8 @@ public interface InformarVista {
     public void socioActualizado();
 
     public void ficheroNoEncontrado();
+
+    public void ficheroCargado();
+
+    public void ficheroGuardado();
 }

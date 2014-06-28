@@ -6,9 +6,17 @@
       <sourceFolder url="file://$MODULE_DIR$/es.blo.Masclet" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/librerias" type="java-resource" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="JCalendar" level="project" />
+    <orderEntry type="module-library">
+      <library name="JCalendar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../GestioSocios/src/librerias/JCalendar/lib/jcalendar-1.4.1.v201109071408.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

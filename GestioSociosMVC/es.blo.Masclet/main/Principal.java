@@ -4,6 +4,8 @@ import controlador.ImplementacionControlador;
 import modelo.ImplementacionModelo;
 import vista.ImplementacionVista;
 
+import javax.swing.*;
+
 /**
  * Created by ratadp on 3/06/14.
  */
@@ -18,7 +20,12 @@ public class Principal {
         modelo.setVista(vista);
         vista.setModelo(modelo);
         vista.setControlador(controlador);
-
+        try
+        {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        }
+        catch(Exception e){
+        }
         vista.crearGUI();
     }
 }

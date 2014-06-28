@@ -6,11 +6,10 @@ import modelo.PreguntarModelo;
 import modelo.clasesNegocio.Socio;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,6 +29,9 @@ public class VentanaPrincipal extends Estilo {
     private boolean seleccionado;
     private NuevoSocio nuevoSocio;
     private Pagos ventanaPagos;
+    private JMenuItem menuCargarArchivo, menuGuardarComoArchivo, menuGuardarArchivo;
+    private File fileGuardar, fileCargar;
+    private FileNameExtensionFilter filtro;
 
     public VentanaPrincipal(JFrame frame, PreguntarModelo modelo, Controlador controlador) {
         this.frame = frame;
@@ -37,6 +39,7 @@ public class VentanaPrincipal extends Estilo {
         this.controlador = controlador;
         this.listaSocios = modelo.listSocios();
         this.seleccionado = false;
+        this.filtro = new FileNameExtensionFilter("BIN", "bin");
         ejecutar();
     }
 
@@ -50,6 +53,7 @@ public class VentanaPrincipal extends Estilo {
         box.setLayout(new BoxLayout(box,BoxLayout.X_AXIS));
         box.setBackground(getColorFondo());
 
+        // PANEL LISTA
         JPanel der = new JPanel();
         der.setBackground(getColorFondo());
         der.setBorder(BorderFactory.createTitledBorder("Lista de socios"));
@@ -65,6 +69,7 @@ public class VentanaPrincipal extends Estilo {
         der.add(scroll);
         box.add(der);
 
+        // PANEL DETALLES SOCIO
         JPanel izq = new JPanel(new BorderLayout());
         izq.setBackground(getColorFondo());
         izq.setBorder(BorderFactory.createTitledBorder("Información Socio"));
@@ -126,29 +131,56 @@ public class VentanaPrincipal extends Estilo {
         sur.add(bActualizar,BorderLayout.WEST);
         izq.add(sur,BorderLayout.SOUTH);
         box.add(izq);
-
         trabajo.add(box,BorderLayout.CENTER);
-        JButton bSalir = new JButton("Salir");
-        bSalir.setActionCommand("salir");
-        trabajo.add(bSalir,BorderLayout.SOUTH);
+//        JButton bSalir = new JButton("Salir");
+//        bSalir.setActionCommand("salir");
+//        trabajo.add(bSalir,BorderLayout.SOUTH);
 
-        //MENU
+        // MENU
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBackground(getColorFondo());
         frame.setJMenuBar(menuBar);
 
+        JMenu menuArchivo = new JMenu("<html><u>A</u>rchivo</html>");
+        menuArchivo.getAccessibleContext().setAccessibleDescription("Menú para la gestión del programa.");
+        menuArchivo.setMnemonic(KeyEvent.VK_A);
+        menuBar.add(menuArchivo);
+        menuGuardarArchivo = new JMenuItem("Guardar...");
+        menuGuardarArchivo.setActionCommand("guardar");
+        menuGuardarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Event.CTRL_MASK));
+        menuGuardarArchivo.setMnemonic(KeyEvent.VK_G);
+        menuArchivo.add(menuGuardarArchivo);
+        menuGuardarComoArchivo = new JMenuItem("Guardar como...");
+        menuGuardarComoArchivo.setActionCommand("guardarcomo");
+        menuArchivo.add(menuGuardarComoArchivo);
+        menuCargarArchivo = new JMenuItem("Cargar...");
+        menuCargarArchivo.setActionCommand("cargar");
+        menuArchivo.add(menuCargarArchivo);
+        menuArchivo.addSeparator();
+        JMenuItem menuSalir = new JMenuItem("Salir");
+        menuSalir.setActionCommand("salir");
+        menuSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, Event.ALT_MASK));
+        menuSalir.setMnemonic(KeyEvent.VK_F4);
+        menuArchivo.add(menuSalir);
+
         JMenu menuCl = new JMenu("<html><u>S</u>ocios</html>");
         menuCl.getAccessibleContext().setAccessibleDescription("Menú para la gestión de socios.");
+        menuCl.setMnemonic(KeyEvent.VK_S);
         menuBar.add(menuCl);
-        JMenuItem menuNuevoSocio = new JMenuItem("Nuevo socio");
+        JMenuItem menuNuevoSocio = new JMenuItem("<html><u>N</u>uevo socio</html>");
         menuNuevoSocio.setActionCommand("nuevosocio");
+        menuNuevoSocio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK | Event.SHIFT_MASK));
+        menuNuevoSocio.setMnemonic(KeyEvent.VK_N);
         menuCl.add(menuNuevoSocio);
-        JMenuItem menuBorrarSocio = new JMenuItem("Borrar socio");
+        JMenuItem menuBorrarSocio = new JMenuItem("<html><u>B</u>orrar socio</html>");
         menuBorrarSocio.setActionCommand("borrarsocio");
+        menuBorrarSocio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, Event.CTRL_MASK | Event.SHIFT_MASK));
+        menuBorrarSocio.setMnemonic(KeyEvent.VK_B);
         menuCl.add(menuBorrarSocio);
 
         JMenu menuListados = new JMenu("<html><u>L</u>istados</html>");
         menuListados.getAccessibleContext().setAccessibleDescription("Menú para la elección de diferentes listados.");
+        menuListados.setMnemonic(KeyEvent.VK_L);
         JMenuItem mSociosTotales = new JMenuItem("Socios totales");
         mSociosTotales.setActionCommand("sociostotales");
         menuListados.add(mSociosTotales);
@@ -157,8 +189,9 @@ public class VentanaPrincipal extends Estilo {
         menuListados.add(mListMenores);
         menuBar.add(menuListados);
 
-        JMenu menuAyuda = new JMenu("<html><u>A</u>yuda</html>");
+        JMenu menuAyuda = new JMenu("<html>A<u>y</u>uda</html>");
         menuAyuda.getAccessibleContext().setAccessibleDescription("Menú de ayuda.");
+        menuAyuda.setMnemonic(KeyEvent.VK_Y);
         menuBar.add(menuAyuda);
         JMenuItem menuAbout = new JMenuItem("Sobre");
         menuAbout.setActionCommand("sobre");
@@ -173,7 +206,11 @@ public class VentanaPrincipal extends Estilo {
         ListenerAccion listenerAccion = new ListenerAccion();
         bPagos.addActionListener(listenerAccion);
         bActualizar.addActionListener(listenerAccion);
-        bSalir.addActionListener(listenerAccion);
+//        bSalir.addActionListener(listenerAccion);
+        menuGuardarArchivo.addActionListener(listenerAccion);
+        menuGuardarComoArchivo.addActionListener(listenerAccion);
+        menuCargarArchivo.addActionListener(listenerAccion);
+        menuSalir.addActionListener(listenerAccion);
         menuNuevoSocio.addActionListener(listenerAccion);
         menuBorrarSocio.addActionListener(listenerAccion);
         menuAbout.addActionListener(listenerAccion);
@@ -182,10 +219,11 @@ public class VentanaPrincipal extends Estilo {
 
 
         frame.setContentPane(trabajo);
-//        frame.pack();
-        frame.setSize(600, 423);
+        frame.pack();
+//        frame.setSize(650, 450);
         frame.setLocation(150, 50);
         frame.setResizable(false);
+        frame.setIconImage(getIcon());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -207,6 +245,10 @@ public class VentanaPrincipal extends Estilo {
         Socio borrar = listaSocios.get(indice);
         String nombreBorrar = borrar.getNombre() + " " + borrar.getApellido();
         listaModelo.removeElement(nombreBorrar);
+    }
+
+    private void vaciarLista() {
+        listaModelo.clear();
     }
 
     public JFrame getFrame() {
@@ -273,6 +315,14 @@ public class VentanaPrincipal extends Estilo {
         return ventanaPagos.getDNI();
     }
 
+    public File getFileGuardar() {
+        return fileGuardar;
+    }
+
+    public File getFileCargar() {
+        return fileCargar;
+    }
+
     private class ListenerRaton extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
@@ -292,6 +342,7 @@ public class VentanaPrincipal extends Estilo {
         }
 
     }
+
     private class ListenerAccion implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -328,6 +379,31 @@ public class VentanaPrincipal extends Estilo {
                     break;
                 case "listadomenores":
                     new ListadoMenores(frame,modelo);
+                    break;
+                case "guardarcomo":
+                    JFileChooser guardarArchivo = new JFileChooser();
+                    guardarArchivo.setFileFilter(filtro);
+                    int seleccionG = guardarArchivo.showSaveDialog(menuGuardarComoArchivo);
+                    if (seleccionG == JFileChooser.APPROVE_OPTION) {
+                        fileGuardar = guardarArchivo.getSelectedFile();
+                        controlador.guardarArchivo();
+                    }
+                    break;
+                case "guardar":
+                    controlador.guardarDatos();
+                    break;
+                case "cargar":
+                    JFileChooser cargarArchivo = new JFileChooser();
+                    cargarArchivo.setFileFilter(filtro);
+                    int seleccionC = cargarArchivo.showOpenDialog(menuCargarArchivo);
+                    if (seleccionC == JFileChooser.APPROVE_OPTION) {
+                        fileCargar = cargarArchivo.getSelectedFile();
+                        controlador.cargarArchivo();
+                        listaSocios = modelo.listSocios();
+                        vaciarLista();
+                        rellenarLista();
+                        frame.repaint();
+                    }
                     break;
             }
         }

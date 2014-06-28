@@ -2,6 +2,7 @@ package modelo;
 
 import modelo.clasesNegocio.GestorSocio;
 
+import java.io.File;
 import java.util.Calendar;
 
 /**
@@ -19,4 +20,8 @@ public interface ModificarModelo {
     public void guardarDatos();
 
     public GestorSocio cargarDatos();
+
+    public void guardarArchivo(File archivo);
+
+    public void cargarArchivo(File archivo);
 }

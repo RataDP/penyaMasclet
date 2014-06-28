@@ -7,6 +7,7 @@ import vista.gui.Estilo;
 import vista.gui.VentanaPrincipal;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.Calendar;
 
 import static java.lang.Thread.sleep;
@@ -111,6 +112,16 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     }
 
     @Override
+    public void ficheroCargado() {
+        JOptionPane.showMessageDialog(frame,"Fichero cargado", "fich cargado", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void ficheroGuardado() {
+        JOptionPane.showMessageDialog(frame,"Fichero guardado", "fich guardado", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
     public String getDNINuevo() {
         return ventanaPrincipal.getDNINuevo();
     }
@@ -183,5 +194,15 @@ public class ImplementacionVista implements InformarVista, PreguntarVista {
     @Override
     public Calendar getIngreso() {
         return ventanaPrincipal.getIngreso();
+    }
+
+    @Override
+    public File getFileGuardar() {
+        return ventanaPrincipal.getFileGuardar();
+    }
+
+    @Override
+    public File getFileCargar() {
+        return ventanaPrincipal.getFileCargar();
     }
 }

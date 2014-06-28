@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 public class SociosTotales extends Estilo {
     private JDialog dialog;
     private PreguntarModelo modelo;
+    private JButton volver;
 
     public SociosTotales(JFrame frame, PreguntarModelo modelo) {
         super();
@@ -42,7 +43,7 @@ public class SociosTotales extends Estilo {
 
         JPanel sur = new JPanel(new BorderLayout());
         sur.setBackground(getColorFondo());
-        JButton volver = new JButton("Volver");
+        volver = new JButton("Volver");
         sur.add(volver,BorderLayout.EAST);
         trabajo.add(sur,BorderLayout.SOUTH);
 
