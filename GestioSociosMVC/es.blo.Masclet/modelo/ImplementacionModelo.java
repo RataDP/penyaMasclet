@@ -200,9 +200,9 @@ public class ImplementacionModelo implements PreguntarModelo, ModificarModelo, S
         try {
             outputStream = new PrintWriter("Pagos" + dni + ".txt");
         double importeTotal = 0.0;
-        StringBuilder sb = new StringBuilder("Lista de pagos del socio (" + dni + ") " + socio.getNombre() + " " + socio.getApellido() +"\n");
+        StringBuilder sb = new StringBuilder("Lista de pagos del socio (" + dni + ") " + socio.getNombre() + " " + socio.getApellido() +"\n\r");
         for (Pago pago: lista) {
-            sb.append("\t" + pago + "\n");
+            sb.append("\t" + pago + "\n\r");
             importeTotal += pago.getImporte();
         }
         sb.append("Con " + lista.size() + " pagos, con un total recaudado de " + importeTotal + "€");
