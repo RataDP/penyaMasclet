@@ -4,7 +4,7 @@ Penya El Masclet
 ![logo](/GestioSocios/src/resources/logo.png)
 
 Aplicación para la gestión de los socios de la Penya El Masclet.
-La aplicación esta compilada con ~~Java8~~ Java7.
+La aplicación esta compilada con ~~Java8 Java7~~ Java8.
 
 ============
 ##Task
@@ -37,3 +37,7 @@ public abstract class Estilo {
     public Image getIcon();
 }
 ```
+
+============
+##Descarga
+[Descargar] (https://www.dropbox.com/s/at7wu4uismpu6h6/Mascletet0-03.jar) aplicación JAR
